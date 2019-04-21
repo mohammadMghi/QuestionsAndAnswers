@@ -3,6 +3,8 @@ package com.example.questionandanswer.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.questionandanswer.R;
+
 public class ContactusActivity extends AppCompatActivity {
 
     @Override

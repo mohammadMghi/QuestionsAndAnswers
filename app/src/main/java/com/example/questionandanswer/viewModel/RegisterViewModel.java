@@ -1,4 +1,4 @@
-package com.example.questionandanswer;
+package com.example.questionandanswer.viewModel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
@@ -14,7 +14,7 @@ public class RegisterViewModel extends ViewModel {
 
     private MutableLiveData<RegisterUser> currentName;
 
-    public MutableLiveData<RegisterUser> getUser() {
+    public MutableLiveData<RegisterUser> sendUser() {
         if (currentName == null) {
             currentName = new MutableLiveData<RegisterUser>();
         }

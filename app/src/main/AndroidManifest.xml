@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.questionandanswer">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.LoginActivity"></activity>
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.QuestionContentActivity"></activity>
+        <activity android:name=".view.NewQuestion" />
+        <activity android:name=".view.SplashScreen" />
+        <activity android:name=".view.ContactusActivity" />
+        <activity android:name=".view.ContributionsActivity" />
+        <activity android:name=".view.MyQuestions" />
+        <activity android:name=".view.RegisterActivity" />
+        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
