@@ -391,7 +391,9 @@ public class ApiService {
     }
 
 
-
+    public interface OnRegisterResponse {
+        void onResponse(String token);
+    }
     public interface OnRecivedInfo {
         void onRecivied(User user);
     }
