@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Movie;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -69,6 +70,11 @@ public class ApiService {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("error", error.toString());
+                    if(error.toString().equals("com.android.volley.AuthFailureError")){
+                        Toast.makeText(context, "username or password is wrong", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "please check your intent connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }) {
                 /**
