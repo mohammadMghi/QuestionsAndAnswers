@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    public User userr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         final DrawerLayout drawerLayout = findViewById(R.id.dr_layout);
         final NavigationView navigationView = findViewById(R.id.nav_view);
         FloatingActionButton floatingActionButton = findViewById(R.id.new_question);
-
+        userr = new User();
 
         //get main question after login and sign up for main activity
         apiService.getMainQuestions(new ApiService.OnRecievedMainQuestion() {
@@ -55,8 +55,9 @@ public class MainActivity extends AppCompatActivity {
         apiService.getUserInfo(sharedPrefManager.token(), new ApiService.OnRecivedInfo() {
             @Override
             public void onRecivied(User user) {
+                userr.setURL_prifle(user.getURL_prifle());
                 TextView username = findViewById(R.id.txtusername);
-                ImageView imgprofile = findViewById(R.id.imageView);
+                ImageView imgprofile = findViewById(R.id.header_profile);
                 username.setText(user.getName());
                 sharedPrefManager.saveUserID(user.getId());
 
@@ -94,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent3 = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent3);
                         finish();
+                        break;
+                    case R.id.settings:
+                        Intent intentSettings = new Intent(MainActivity.this,SettingActivity.class);
+                        intentSettings.putExtra("URL_PROFILE",userr.getURL_prifle());
+                        startActivity(intentSettings);
                         break;
                     default:
                         break;

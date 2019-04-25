@@ -147,7 +147,7 @@ public class ApiService {
                     user.setEmail(response.getString("email"));
                     user.setName(response.getString("name"));
                     user.setId(response.getInt("id"));
-                    if (!response.has("img_profile") && !response.isNull("img_profile"))
+                    if (response.has("img_profile") && !response.isNull("img_profile"))
                         user.setURL_prifle(response.getString("img_profile"));
                     else
                         user.setURL_prifle("null");
@@ -390,13 +390,73 @@ public class ApiService {
     }
 
 
-    public interface OnLoginResponse {
-        void onResponse(String token);
+    public void uploadImageProfile(int id_user,  Bitmap bitmap, final OnRecieviedImg onRecieviedImg) {
+        JSONObject requestJsonObject = new JSONObject();
 
-        void onResponseError(int state);
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            if (bitmap != null) {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+                requestJsonObject.put("img_profile", encodedImage);
+            }
+            requestJsonObject.put("id_user", id_user);
+
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, "http://192.168.1.4:8000/api/profileImage", requestJsonObject, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    try {
+                        if (response.getBoolean("state")) {
+                            onRecieviedImg.onRecieved(true);
+
+                        } else {
+                            onRecieviedImg.onRecieved(false);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("response", response.toString());
+                }
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("error", error.toString());
+                }
+            }) {
+                /**
+                 * Passing some request headers*
+                 */
+                @Override
+                public Map getHeaders() throws AuthFailureError {
+                    HashMap headers = new HashMap();
+                    headers.put("Content-Type", "application/json");
+                    headers.put("csrf-token", "X-XSRF-TOKEN");
+                    return headers;
+                }
+            };
+            request.setRetryPolicy(new DefaultRetryPolicy(18000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            Volley.newRequestQueue(context).add(request);
+        } catch (JSONException e) {
+            Log.e(TAG, "loginUser: " + e.toString());
+        }
     }
 
 
+
+
+
+    public interface OnLoginResponse {
+        void onResponse(String token);
+        void onResponseError(int state);
+    }
+
+    public interface OnRecieviedImg{
+        void onRecieved(boolean state);
+    }
     public interface OnRegisterResponse {
         void onResponse(String token);
     }

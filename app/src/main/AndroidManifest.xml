@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.QuestionContentActivity"></activity>
+        <activity android:name=".view.SettingActivity"></activity>
+        <activity android:name=".view.QuestionContentActivity" />
         <activity android:name=".view.NewQuestion" />
         <activity android:name=".view.SplashScreen" />
         <activity android:name=".view.ContactusActivity" />
@@ -20,6 +21,8 @@
         <activity android:name=".view.MyQuestions" />
         <activity android:name=".view.RegisterActivity" />
         <activity android:name=".view.MainActivity" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

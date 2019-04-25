@@ -11,26 +11,26 @@
         android:id="@+id/txtusername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:text="username"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/header_profile"
+        app:layout_constraintStart_toStartOf="@+id/header_profile"
+        app:layout_constraintTop_toBottomOf="@+id/header_profile" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/header_profile"
         android:layout_width="69dp"
         android:layout_height="70dp"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[0]" />
+        tools:src="@tools:sample/avatars[0]" />
 
 
 </android.support.constraint.ConstraintLayout>
