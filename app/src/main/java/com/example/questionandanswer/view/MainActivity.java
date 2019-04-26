@@ -30,12 +30,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ApiService apiService = new ApiService(this);
+
 
         final DrawerLayout drawerLayout = findViewById(R.id.dr_layout);
         final NavigationView navigationView = findViewById(R.id.nav_view);
         FloatingActionButton floatingActionButton = findViewById(R.id.new_question);
         userr = new User();
+
+        ApiService apiService = new ApiService(this);
+        final SharedPrefManager sharedPrefManager = new SharedPrefManager(this);
+
+        //get data of user after sing up or login
+        apiService.getUserInfo(sharedPrefManager.token(), new ApiService.OnRecivedInfo() {
+            @Override
+            public void onRecivied(User user) {
+                userr.setURL_prifle(user.getURL_prifle());
+                TextView username = findViewById(R.id.txtusername);
+                ImageView imgprofile = findViewById(R.id.header_profile);
+                user.getName();
+                user.getId();
+                username.setText(user.getName());
+                sharedPrefManager.saveUserID(user.getId());
+
+                if (!(user.getURL_prifle() == "null"))
+                    Picasso.get().load("http://192.168.1.4:8000/storage/" + user.getURL_prifle()).into(imgprofile);
+                else
+                    imgprofile.setImageResource(R.drawable.default_profile);
+
+            }
+        });
+
 
         //get main question after login and sign up for main activity
         apiService.getMainQuestions(new ApiService.OnRecievedMainQuestion() {
@@ -49,25 +73,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        final SharedPrefManager sharedPrefManager = new SharedPrefManager(this);
 
-        //get data of user after sing up or login
-        apiService.getUserInfo(sharedPrefManager.token(), new ApiService.OnRecivedInfo() {
-            @Override
-            public void onRecivied(User user) {
-                userr.setURL_prifle(user.getURL_prifle());
-                TextView username = findViewById(R.id.txtusername);
-                ImageView imgprofile = findViewById(R.id.header_profile);
-                username.setText(user.getName());
-                sharedPrefManager.saveUserID(user.getId());
-
-                if (!(user.getURL_prifle() == "null"))
-                    Picasso.get().load("http://192.168.1.4:8000/storage/" + user.getURL_prifle()).into(imgprofile);
-                else
-                    imgprofile.setImageResource(R.drawable.default_profile);
-
-            }
-        });
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

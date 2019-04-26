@@ -20,7 +20,7 @@ public class SharedPrefManager {
         SharedPreferences userDetails = context.getSharedPreferences(SHAREDPREF, MODE_PRIVATE);
         SharedPreferences.Editor editor = userDetails.edit();
         editor.putString("token","Bearer "+token);
-        editor.commit();
+        editor.apply();
     }
     public String token(){
         SharedPreferences prefs = context.getSharedPreferences(SHAREDPREF, Context.MODE_PRIVATE);
@@ -37,7 +37,9 @@ public class SharedPrefManager {
 
     public void clean(){
         SharedPreferences prefs = context.getSharedPreferences(SHAREDPREF, Context.MODE_PRIVATE);
-        prefs.edit().clear().apply();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
     }
 
     public void saveUserID(int idUser){

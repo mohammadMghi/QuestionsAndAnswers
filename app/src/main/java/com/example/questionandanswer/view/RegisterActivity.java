@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         loginViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
@@ -73,13 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String token) {
                             if(token.length()>10){
-                                Toast.makeText(RegisterActivity.this, "Ok ,you was registering", Toast.LENGTH_SHORT).show();
-                                SharedPrefManager sharedPrefManager = new SharedPrefManager(RegisterActivity.this);
-                                sharedPrefManager.write(token);
-                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                Toast.makeText(RegisterActivity.this, "thank you are register is complete please login...", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                                 startActivity(intent);
                             }else{
-                                Toast.makeText(RegisterActivity.this, "sorry ,a problem has been creating", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "sorry ,a problem has been register,please try a few more minutes", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

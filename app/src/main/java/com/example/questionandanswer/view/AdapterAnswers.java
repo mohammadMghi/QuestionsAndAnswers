@@ -37,7 +37,7 @@ public class AdapterAnswers extends RecyclerView.Adapter<AdapterAnswers.NewsView
     @Override
     public void onBindViewHolder(AdapterAnswers.NewsViewHolder holder, int position) {
         final Answers answer =answers.get(position);
-        holder.username.setText(answer.getContent());
+        holder.username.setText(answer.getUsername());
         holder.content.setText(answer.getContent());
         if(!(answer.getUrlProfile() == "null")) {
             Picasso.get().load("http://192.168.1.4:8000/storage/" + answer.getUrlProfile()).into(holder.imgProfile);

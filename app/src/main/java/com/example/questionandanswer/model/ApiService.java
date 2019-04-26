@@ -108,7 +108,6 @@ public class ApiService {
                 public void onResponse(JSONObject response) {
 
                     onRegisterResponse.onResponse(response.optString("token"));
-
                     Log.d("response", response.toString());
                 }
 
@@ -143,6 +142,7 @@ public class ApiService {
             @Override
             public void onResponse(JSONObject response) {
                 User user = new User();
+                String tokend=token;
                 try {
                     user.setEmail(response.getString("email"));
                     user.setName(response.getString("name"));

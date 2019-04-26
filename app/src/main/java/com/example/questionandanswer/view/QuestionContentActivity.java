@@ -40,7 +40,7 @@ public class QuestionContentActivity extends AppCompatActivity {
         Button btn_send_answer = findViewById(R.id.send_answer);
         TextView txt_answer = findViewById(R.id.txt_anaswer_content);
 
-        final int QuestionId= getIntent().getIntExtra("ID_QUESTION",-1);
+        final int QuestionId= getIntent().getIntExtra("ID",-1);
         String title= getIntent().getStringExtra("TITLE");
         String content = getIntent().getStringExtra("CONTENT");
         final String url= getIntent().getStringExtra("IMG_URL");
@@ -83,7 +83,7 @@ public class QuestionContentActivity extends AppCompatActivity {
         btn_send_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                apiService.sendAnswer(QuestionId, 45, et_answer.getText().toString(), new ApiService.PostCommand() {
+                apiService.sendAnswer(QuestionId, sharedPrefManager.getUserID(), et_answer.getText().toString(), new ApiService.PostCommand() {
                     @Override
                     public void Status(int state) {
                         if(state == 1){
